@@ -41,7 +41,7 @@ export default {
       this.foamTree = new FoamTree({
         id: 'visualization',
         // descriptionGroup: 'always',
-        // layout: 'squarified',
+        layout: 'squarified',
         // stacking: 'flattened',
         dataObject,
       })
