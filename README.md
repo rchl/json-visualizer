@@ -1,4 +1,4 @@
-# JSON Explorer
+# JSON Visualizer
 
 Visualizes JSON data using foam tree with AST node size information included.
 
