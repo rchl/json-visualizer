@@ -59,6 +59,7 @@ export default {
         <button :enabled="inputString" @click="initFoamTree">
           <h4>Visualize</h4>
         </button>
+        <p>Source code at <a href="https://github.com/rchl/json-visualizer" target="_blank">github.com/rchl/json-visualizer</a></p>
         <div v-if="foamTreeError" class="error-text">
           {{ foamTreeError }}
         </div>
