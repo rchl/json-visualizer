@@ -1,5 +1,8 @@
 {
-  "private": true,
+  "name": "lsp-log-parser",
+  "version": "1.0.0",
+  "description": "Visualizes JSON data using foam tree with AST node size information included",
+  "author": "Rafał Chłodnicki",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

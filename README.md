@@ -2,6 +2,8 @@
 
 Visualizes JSON data using foam tree with AST node size information included.
 
+Deployed automatically on commit to https://json-visualizer.netlify.app/
+
 ## Setup
 
 Make sure to install the dependencies:
