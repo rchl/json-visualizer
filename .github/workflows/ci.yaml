@@ -22,9 +22,6 @@ jobs:
         with:
           cache: pnpm
           node-version-file: .nvmrc
-      - name: pnpm install
-        run: pnpm
-      - name: Lint
-        run: pnpm lint
-      - name: Build
-        run: pnpm build
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm build
