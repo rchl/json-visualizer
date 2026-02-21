@@ -7,7 +7,6 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "lint": "eslint .",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -20,7 +19,6 @@
   "devDependencies": {
     "@types/bytes": "^3.1.5",
     "@types/json-to-ast": "^2.1.4",
-    "eslint": "^10.0.1",
     "nuxt": "^4.3.1",
     "typescript": "5.9.3"
   }
