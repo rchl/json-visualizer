@@ -1,5 +1,5 @@
 {
-  "name": "lsp-log-parser",
+  "name": "json-visualizer",
   "version": "1.0.0",
   "description": "Visualizes JSON data using foam tree with AST node size information included",
   "author": "Rafał Chłodnicki",
@@ -12,16 +12,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@carrotsearch/foamtree": "^3.5.0",
+    "@carrotsearch/foamtree": "^3.5.7",
     "bytes": "^3.1.2",
     "json-to-ast": "^2.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.34.1",
-    "@types/bytes": "^3.1.1",
-    "@types/json-to-ast": "^2.1.2",
-    "eslint": "^8.32.0",
-    "nuxt": "^3.0.0",
-    "typescript": "4.8.4"
+    "@types/bytes": "^3.1.5",
+    "@types/json-to-ast": "^2.1.4",
+    "eslint": "^8.57.1",
+    "nuxt": "^3.21.1",
+    "typescript": "4.9.5"
   }
 }
