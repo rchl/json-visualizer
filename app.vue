@@ -12,6 +12,7 @@ export default {
       foamTreeError: '',
       inputString: '',
       showVisualization: false,
+      isDraggingOver: false,
     }
   },
   mounted() {
@@ -25,6 +26,22 @@ export default {
     })
   },
   methods: {
+    onDragOver(event: DragEvent) {
+      event.preventDefault()
+      this.isDraggingOver = true
+    },
+    onDragLeave() {
+      this.isDraggingOver = false
+    },
+    async onDrop(event: DragEvent) {
+      event.preventDefault()
+      this.isDraggingOver = false
+      const file = event.dataTransfer?.files[0]
+      if (!file || !file.name.endsWith('.sublime_session'))
+        return
+      this.inputString = await file.text()
+      this.initFoamTree()
+    },
     async initFoamTree() {
       try {
         const dataObject = parseRootNode(jsonToAst(this.inputString, { loc: true }))
@@ -51,10 +68,13 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div @dragover="onDragOver" @dragleave="onDragLeave" @drop="onDrop">
+    <div v-if="isDraggingOver" class="drop-overlay">
+      Drop <code>.sublime_session</code> file
+    </div>
     <div v-if="!showVisualization" class="full-size input-ui">
       <div class="input-ui-content">
-        <h3>Paste <code>Session.sublime_session</code> contents</h3>
+        <h2>Drop <code>Session.sublime_session</code> file onto the page or paste its contents into the box below.</h2>
         <textarea v-model="inputString" class="flex-grow input-field" />
         <button :enabled="inputString" @click="initFoamTree">
           <h4>Visualize</h4>
@@ -108,5 +128,21 @@ body {
 
 .flex-grow {
   flex: 1;
+}
+
+.drop-overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  color: white;
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
 }
 </style>
