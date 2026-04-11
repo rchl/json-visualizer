@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@carrotsearch/foamtree':
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^3.6.1
+        version: 3.6.1
       bytes:
         specifier: ^3.1.2
         version: 3.1.2
@@ -165,8 +165,8 @@ packages:
       commander:
         optional: true
 
-  '@carrotsearch/foamtree@3.6.0':
-    resolution: {integrity: sha512-2LTcYDK/VekMOD0IMNIb2EyqsohCnWgcKkyFX+7TRYkvxruTqI3JYjmQvCHY1aX3SRw5otZjb/kUosSUvXlaxA==}
+  '@carrotsearch/foamtree@3.6.1':
+    resolution: {integrity: sha512-SPIU5CR+y6E/ZXVLTsLHWrjithoNpGpcMqTHAiRaYU/61AIFL6YJQ3yNU+KfN67mP2YnvoELjiHWQzQ+2k2+5w==}
 
   '@clack/core@1.2.0':
     resolution: {integrity: sha512-qfxof/3T3t9DPU/Rj3OmcFyZInceqj/NVtO9rwIuJqCUgh32gwPjpFQQp/ben07qKlhpwq7GzfWpST4qdJ5Drg==}
@@ -3714,7 +3714,7 @@ snapshots:
       cac: 6.7.14
       citty: 0.2.2
 
-  '@carrotsearch/foamtree@3.6.0': {}
+  '@carrotsearch/foamtree@3.6.1': {}
 
   '@clack/core@1.2.0':
     dependencies:
