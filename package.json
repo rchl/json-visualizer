@@ -24,6 +24,6 @@
     "@types/json-to-ast": "^2.1.4",
     "eslint": "^10.10.0",
     "nuxt": "^4.4.2",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   }
 }
