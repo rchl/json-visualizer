@@ -1,9 +1,14 @@
 <script lang="ts">
-import jsonToAst from 'json-to-ast'
+import type { PreviewEntry, RootFoamGroup } from '~/parser'
 // @ts-expect-error no types
 import { FoamTree } from '@carrotsearch/foamtree'
+import jsonToAst from 'json-to-ast'
 import { parseRootNode } from '~/parser'
-import type { RootFoamGroup } from '~/parser'
+
+/** Keep the preview fully inside the viewport. Must match the sizes in `.hover-preview`. */
+const PREVIEW_WIDTH = 360
+const PREVIEW_MAX_HEIGHT = 340
+const PREVIEW_CURSOR_OFFSET = 16
 
 export default {
   data() {
@@ -13,6 +18,10 @@ export default {
       inputString: '',
       showVisualization: false,
       isDraggingOver: false,
+      previewTitle: '',
+      previewEntries: null as PreviewEntry[] | null,
+      previewX: 0,
+      previewY: 0,
     }
   },
   mounted() {
@@ -26,6 +35,19 @@ export default {
     })
   },
   methods: {
+    onMouseMove(event: MouseEvent) {
+      this.previewX = Math.max(0, Math.min(event.clientX + PREVIEW_CURSOR_OFFSET, window.innerWidth - PREVIEW_WIDTH - PREVIEW_CURSOR_OFFSET))
+      this.previewY = Math.max(0, Math.min(event.clientY + PREVIEW_CURSOR_OFFSET, window.innerHeight - PREVIEW_MAX_HEIGHT - PREVIEW_CURSOR_OFFSET))
+    },
+    onGroupHover(event: { group?: { label?: string, preview?: PreviewEntry[] } | null }) {
+      const preview = event.group?.preview
+      if (!preview) {
+        this.previewEntries = null
+        return
+      }
+      this.previewTitle = (event.group?.label ?? '').split('\n')[0]
+      this.previewEntries = preview
+    },
     onDragOver(event: DragEvent) {
       event.preventDefault()
       this.isDraggingOver = true
@@ -61,6 +83,7 @@ export default {
         layout: 'squarified',
         // stacking: 'flattened',
         dataObject,
+        onGroupHover: this.onGroupHover,
       })
     },
   },
@@ -68,7 +91,7 @@ export default {
 </script>
 
 <template>
-  <div @dragover="onDragOver" @dragleave="onDragLeave" @drop="onDrop">
+  <div @dragover="onDragOver" @dragleave="onDragLeave" @drop="onDrop" @mousemove="onMouseMove">
     <div v-if="isDraggingOver" class="drop-overlay">
       Drop <code>.sublime_session</code> file
     </div>
@@ -86,6 +109,21 @@ export default {
       </div>
     </div>
     <div v-else id="visualization" class="full-size" />
+    <div
+      v-if="previewEntries"
+      class="hover-preview"
+      :style="{ left: `${previewX}px`, top: `${previewY}px` }"
+    >
+      <div class="hover-preview-title">
+        {{ previewTitle }}
+      </div>
+      <dl class="hover-preview-entries">
+        <template v-for="(entry, index) in previewEntries" :key="index">
+          <dt>{{ entry.key }}</dt>
+          <dd>{{ entry.value }}</dd>
+        </template>
+      </dl>
+    </div>
   </div>
 </template>
 
@@ -128,6 +166,55 @@ body {
 
 .flex-grow {
   flex: 1;
+}
+
+.hover-preview {
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  font-size: 12px;
+  max-height: 340px;
+  overflow: hidden;
+  padding: 8px 10px;
+  pointer-events: none;
+  position: fixed;
+  width: 360px;
+  z-index: 20;
+}
+
+.hover-preview-title {
+  border-bottom: 1px solid #eee;
+  font-weight: bold;
+  margin-bottom: 6px;
+  overflow: hidden;
+  padding-bottom: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hover-preview-entries {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  column-gap: 8px;
+  margin: 0;
+  row-gap: 2px;
+}
+
+.hover-preview-entries dt {
+  color: #0b6ea8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hover-preview-entries dd {
+  color: #333;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .drop-overlay {
