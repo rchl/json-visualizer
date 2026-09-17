@@ -1,0 +1,3 @@
+# Match the 3-day minimum release age enforced by the shared Renovate preset
+# (security:minimumReleaseAgeNpm). Value is in minutes.
+minimumReleaseAge: 4320
