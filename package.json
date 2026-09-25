@@ -1,7 +1,7 @@
 {
   "name": "json-visualizer",
   "version": "1.0.0",
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "pnpm@12.6.0",
   "description": "Visualizes JSON data using foam tree with AST node size information included",
   "author": "Rafał Chłodnicki",
   "scripts": {
@@ -22,7 +22,7 @@
     "@antfu/eslint-config": "^9.5.1",
     "@types/bytes": "^3.1.6",
     "@types/json-to-ast": "^2.1.4",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "nuxt": "^4.5.2",
     "typescript": "6.0.3"
   }
