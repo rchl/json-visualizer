@@ -19,7 +19,7 @@
     "json-to-ast": "^2.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^9.5.1",
+    "@antfu/eslint-config": "^10.0.0",
     "@types/bytes": "^3.1.6",
     "@types/json-to-ast": "^2.1.4",
     "eslint": "^10.11.0",
